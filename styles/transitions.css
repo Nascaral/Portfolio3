@@ -166,15 +166,6 @@
   }
 }
 
-/* Project cards transition */
-.project-card {
-  view-transition-name: project-card;
-}
-
-::view-transition-old(project-card),
-::view-transition-new(project-card) {
-  animation-duration: 0.5s;
-}
 
 
 /* Fade transition for certain pages */
