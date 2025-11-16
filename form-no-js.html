@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form - No JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Validation styling */
+        input:invalid,
+        textarea:invalid {
+            border-color: #ddd;
+        }
+
+        input:user-invalid,
+        textarea:user-invalid {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        input:valid,
+        textarea:valid {
+            border-color: #27ae60;
+        }
+
+        /* Don't show valid styling until user has interacted */
+        input:not(:placeholder-shown):valid,
+        textarea:not(:placeholder-shown):valid {
+            border-color: #27ae60;
+        }
+
+        input:not(:placeholder-shown):user-invalid,
+        textarea:not(:placeholder-shown):user-invalid {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        button[type="submit"]:focus {
+            outline: 3px solid rgba(102, 126, 234, 0.5);
+            outline-offset: 2px;
+        }
+
+        output {
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: block;
+            min-height: 20px;
+        }
+
+        .error-output:not(:empty) {
+            background: #fff5f5;
+            border: 1px solid #e74c3c;
+            color: #c0392b;
+        }
+
+        .info-output:not(:empty) {
+            background: #f0f9ff;
+            border: 1px solid #3498db;
+            color: #2980b9;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            input, textarea, select {
+                border-width: 3px;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p class="subtitle">We'd love to hear from you. Fill out the form below to get in touch.</p>
+        
+        <form action="https://httpbin.org/post" method="POST">
+            <!-- Hidden bot field -->
+            <input type="hidden" name="possible_bot" value="true">
+            
+            <div class="form-group">
+                <label for="name" class="required">Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required 
+                    minlength="2" 
+                    maxlength="50"
+                    pattern="[A-Za-z\s\-']+"
+                    placeholder="John Doe"
+                    aria-required="true"
+                    aria-describedby="name-help">
+                <span class="help-text" id="name-help">Letters, spaces, hyphens, and apostrophes only</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="required">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    maxlength="100"
+                    placeholder="john@example.com"
+                    aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    pattern="[\d\s\-\(\)\+]+"
+                    maxlength="20"
+                    placeholder="(123) 456-7890"
+                    aria-describedby="phone-help">
+                <span class="help-text" id="phone-help">Optional - Numbers and standard formatting characters only</span>
+            </div>
+
+            <div class="form-group">
+                <label for="subject" class="required">Subject</label>
+                <select 
+                    id="subject" 
+                    name="subject" 
+                    required
+                    aria-required="true">
+                    <option value="">-- Please select --</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="support">Technical Support</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comments" class="required">Comments</label>
+                <textarea 
+                    id="comments" 
+                    name="comments" 
+                    required 
+                    minlength="10" 
+                    maxlength="500"
+                    placeholder="Please share your thoughts..."
+                    aria-required="true"
+                    aria-describedby="comments-help"></textarea>
+                <span class="help-text" id="comments-help">Minimum 10 characters, maximum 500 characters</span>
+            </div>
+
+            <button type="submit">Send Message</button>
+
+            <output class="error-output" aria-live="polite"></output>
+            <output class="info-output" aria-live="polite"></output>
+        </form>
+    </div>
+</body>
+</html>
