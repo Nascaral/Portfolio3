@@ -45,13 +45,25 @@
   }
 }
 
-html:has(#theme-toggle:checked) {
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-elevated: #f1f5f9;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --border: color-mix(in oklab, var(--accent-purple), transparent 80%);
+/* Dark theme override */
+:root[data-theme="dark"] {
+    --bg: #0a0e27;
+    --surface: #151938;
+    --surface-elevated: #1e2447;
+    --ink: #e7ebf1;
+    --muted: #a0a8c5;
+    --border: color-mix(in oklab, var(--accent-purple), transparent 85%);
+}
+
+/* Light theme explicit */
+:root[data-theme="light"] {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-elevated: #f1f5f9;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --border: color-mix(in oklab, var(--accent-purple), transparent 80%);
+  
 }
 
 *, *::before, *::after { box-sizing: border-box; }

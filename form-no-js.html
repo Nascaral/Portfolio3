@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form - No JavaScript</title>
+    <script src="/theme.js"></script>
     <style>
         * {
             margin: 0;
@@ -207,7 +208,14 @@
     <div class="container">
         <h1>Contact Us</h1>
         <p class="subtitle">We'd love to hear from you. Fill out the form below to get in touch.</p>
-        
+            <noscript>
+        <style>
+            .theme-toggle { display: none; }
+        </style>
+        <div style="background: #fff3cd; padding: 10px; text-align: center; border: 1px solid #ffc107; margin: 10px;">
+            Theme toggle requires JavaScript. Using system theme preferences.
+        </div>
+    </noscript>
         <form action="https://httpbin.org/post" method="POST">
             <!-- Hidden bot field -->
             <input type="hidden" name="possible_bot" value="true">
