@@ -1,121 +1,145 @@
+
 @view-transition {
   navigation: auto;
 }
 
-
-/* Customize the default page transition duration */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.4s;
-  animation-timing-function: ease-in-out;
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
 }
 
-/* Old page slides out to the left and fades */
 ::view-transition-old(root) {
-  animation-name: slide-out-left;
+  animation-name: page-fade-out;
+  z-index: 1;
 }
 
-/* New page slides in from the right and fades in */
 ::view-transition-new(root) {
-  animation-name: slide-in-right;
+  animation-name: page-fade-in;
+  z-index: 2;
 }
 
-@keyframes slide-out-left {
-  from {
-    transform: translateX(0);
+@keyframes page-fade-out {
+  0% {
     opacity: 1;
-  }
-  to {
-    transform: translateX(-30px);
-    opacity: 0;
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    transform: translateX(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-
-/* Brand logo transition - maintain position across pages */
-.brand__logo {
-  view-transition-name: brand-logo;
-}
-
-::view-transition-old(brand-logo),
-::view-transition-new(brand-logo) {
-  animation-duration: 0.5s;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Page header transitions */
-.page-header h1 {
-  view-transition-name: page-title;
-}
-
-::view-transition-old(page-title),
-::view-transition-new(page-title) {
-  animation-duration: 0.6s;
-}
-
-::view-transition-old(page-title) {
-  animation-name: title-fade-out;
-}
-
-::view-transition-new(page-title) {
-  animation-name: title-fade-in;
-}
-
-@keyframes title-fade-out {
-  from {
     transform: translateY(0) scale(1);
-    opacity: 1;
+    filter: blur(0);
   }
-  to {
-    transform: translateY(-20px) scale(0.95);
+  100% {
     opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    filter: blur(4px);
   }
 }
 
-@keyframes title-fade-in {
-  from {
-    transform: translateY(20px) scale(0.95);
+@keyframes page-fade-in {
+  0% {
     opacity: 0;
+    transform: translateY(12px) scale(0.97);
+    filter: blur(6px);
   }
-  to {
+  100% {
+    opacity: 1;
     transform: translateY(0) scale(1);
-    opacity: 1;
+    filter: blur(0);
   }
 }
 
-/* Navigation rail transitions */
+
+.rail--brand {
+  view-transition-name: brand-rail;
+}
+
+::view-transition-old(brand-rail),
+::view-transition-new(brand-rail) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(brand-rail) {
+  animation-duration: 0.001ms;
+}
+
+
 .rail--nav {
   view-transition-name: nav-rail;
 }
 
 ::view-transition-old(nav-rail),
 ::view-transition-new(nav-rail) {
-  animation-duration: 0.3s;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
 }
 
-/* Hero section on home page */
-.hero-title {
-  view-transition-name: hero-title;
+::view-transition-old(nav-rail) {
+  animation-name: nav-fade-out;
 }
 
-::view-transition-old(hero-title),
-::view-transition-new(hero-title) {
-  animation-duration: 0.7s;
+::view-transition-new(nav-rail) {
+  animation-name: nav-fade-in;
 }
 
-/* Profile picture on about page */
+@keyframes nav-fade-out {
+  to { opacity: 0.3; }
+}
+
+@keyframes nav-fade-in {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+
+.page-header h1 {
+  view-transition-name: page-title;
+}
+
+::view-transition-old(page-title),
+::view-transition-new(page-title) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+::view-transition-old(page-title) {
+  animation-name: title-exit;
+}
+
+::view-transition-new(page-title) {
+  animation-name: title-enter;
+}
+
+@keyframes title-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9) rotateX(-10deg);
+    filter: blur(8px);
+  }
+}
+
+@keyframes title-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.85) rotateX(15deg);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.02) rotateX(-2deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0);
+  }
+}
+
+
 .profile-picture img {
   view-transition-name: profile-image;
 }
@@ -123,96 +147,91 @@
 ::view-transition-old(profile-image),
 ::view-transition-new(profile-image) {
   animation-duration: 0.6s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: clip;
+  border-radius: var(--radius);
 }
 
-/* Contact form transition */
+::view-transition-old(profile-image) {
+  animation-name: image-zoom-out;
+}
+
+::view-transition-new(profile-image) {
+  animation-name: image-zoom-in;
+}
+
+@keyframes image-zoom-out {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0) brightness(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-5deg);
+    filter: blur(12px) brightness(1.2);
+  }
+}
+
+@keyframes image-zoom-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.3) rotate(5deg);
+    filter: blur(12px) brightness(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0) brightness(1);
+  }
+}
+
+
 .contact-form {
   view-transition-name: contact-form;
 }
 
 ::view-transition-old(contact-form),
 ::view-transition-new(contact-form) {
-  animation-duration: 0.5s;
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 ::view-transition-old(contact-form) {
-  animation-name: form-scale-out;
+  animation-name: form-slide-out;
 }
 
 ::view-transition-new(contact-form) {
-  animation-name: form-scale-in;
+  animation-name: form-slide-in;
 }
 
-@keyframes form-scale-out {
-  from {
-    transform: scale(1);
+@keyframes form-slide-out {
+  0% {
     opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
-  to {
-    transform: scale(0.95);
+  100% {
     opacity: 0;
+    transform: translateX(-50px) scale(0.92);
+    filter: blur(6px);
   }
 }
 
-@keyframes form-scale-in {
-  from {
-    transform: scale(0.95);
+@keyframes form-slide-in {
+  0% {
     opacity: 0;
+    transform: translateX(50px) scale(0.92);
+    filter: blur(8px);
   }
-  to {
-    transform: scale(1);
+  60% {
     opacity: 1;
+    transform: translateX(-3px) scale(1.01);
+    filter: blur(0);
   }
-}
-
-
-
-/* Fade transition for certain pages */
-@keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Scale transition */
-@keyframes scale-out {
-  from {
-    transform: scale(1);
+  100% {
     opacity: 1;
-  }
-  to {
-    transform: scale(1.05);
-    opacity: 0;
-  }
-}
-
-@keyframes scale-in {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Disable transitions for users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  @view-transition {
-    navigation: auto;
-  }
-  
-  ::view-transition-old(root),
-  ::view-transition-new(root),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation-duration: 0.01ms !important;
-    animation-delay: 0ms !important;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
 }
