@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Cards — Nasser Al Nasser</title>
+  <link rel="icon" href="images/headshot.jpg" type="image/jpg">
+  <script src="theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="styles/transitions.css">
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/nav.css">
+  <link rel="stylesheet" href="styles/project-cards.css">
+  
+
+  <script type="module" src="scripts/ProjectCard.js"></script>
+  <script src="scripts/project-cards.js" defer></script>
+</head>
+
+<body class="frame">
+  <noscript>
+    <style>
+      .theme-toggle { display: none; }
+    </style>
+    <div class="noscript-warning">
+      Theme toggle requires JavaScript. Using system theme preferences.
+    </div>
+  </noscript>
+
+
+  <aside class="rail rail--brand" aria-label="Brand">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="images/logo.png" alt="">
+      <span class="brand__text">
+        <span class="brand__name">NASSER AL NASSER</span>
+        <span class="brand__role">SOFTWARE ENGINEER</span>
+      </span>
+    </a>
+  </aside>
+
+  <main class="content" id="main-content">
+    <header class="page-header">
+      <h1>Project Cards</h1>
+      <p class="lede">Browse my projects loaded dynamically from localStorage or remote server.</p>
+    </header>
+
+
+    <section class="data-controls" aria-labelledby="controls-title">
+      <h2 id="controls-title" class="visually-hidden">Data Loading Controls</h2>
+      <div class="button-group">
+        <button type="button" id="load-local-btn" class="btn btn--primary">
+          <span class="btn__icon">💾</span>
+          Load Local
+        </button>
+        <button type="button" id="load-remote-btn" class="btn btn--secondary">
+          <span class="btn__icon">☁️</span>
+          Load Remote
+        </button>
+        <button type="button" id="clear-cards-btn" class="btn btn--ghost">
+          <span class="btn__icon">🗑️</span>
+          Clear Cards
+        </button>
+      </div>
+      <p class="data-status" id="data-status" aria-live="polite"></p>
+    </section>
+
+
+    <section class="cards-section" aria-labelledby="cards-title">
+      <h2 id="cards-title">My Projects</h2>
+      <div class="cards-grid" id="cards-container">
+
+        <p class="empty-state" id="empty-state">
+          Click "Load Local" or "Load Remote" to display project cards.
+        </p>
+      </div>
+    </section>
+
+    <section class="crud-link-section">
+      <a href="crud.html" class="btn btn--accent">
+        <span class="btn__icon">✏️</span>
+        Manage Projects (CRUD)
+      </a>
+    </section>
+
+    <footer class="page-footer">
+      <p>&copy; 2025 Nasser Al Nasser — <span><a href="contact.html">Get in touch</a></span></p>
+    </footer>
+  </main>
+
+  <nav class="rail rail--nav" aria-label="Primary">
+    <label class="theme-toggle" for="theme-toggle" title="Toggle light/dark">☀︎/☾</label>
+    <input hidden type="checkbox" id="theme-toggle" aria-label="Toggle light or dark theme">
+
+    <ul class="vnav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="project-cards.html" aria-current="page">Cards</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
