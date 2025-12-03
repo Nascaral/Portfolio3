@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manage Projects (CRUD) — Nasser Al Nasser</title>
+  <link rel="icon" href="images/headshot.jpg" type="image/jpg">
+  <script src="theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="styles/transitions.css">
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/nav.css">
+  <link rel="stylesheet" href="styles/crud.css">
+  
+  <script type="module" src="scripts/ProjectCard.js"></script>
+  <script src="scripts/crud.js" defer></script>
+</head>
+
+<body class="frame">
+  <noscript>
+    <style>
+      .theme-toggle { display: none; }
+    </style>
+    <div class="noscript-warning">
+      Theme toggle requires JavaScript. Using system theme preferences.
+    </div>
+  </noscript>
+
+  <!-- Left Rail -->
+  <aside class="rail rail--brand" aria-label="Brand">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="images/logo.png" alt="">
+      <span class="brand__text">
+        <span class="brand__name">NASSER AL NASSER</span>
+        <span class="brand__role">SOFTWARE ENGINEER</span>
+      </span>
+    </a>
+  </aside>
+
+  <main class="content" id="main-content">
+    <header class="page-header">
+      <h1>Manage Projects</h1>
+      <p class="lede">Create, Update, and Delete projects using CRUD operations.</p>
+    </header>
+
+    <!-- Storage Selection -->
+    <section class="storage-selector" aria-labelledby="storage-title">
+      <h2 id="storage-title">Select Data Storage</h2>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="storage" value="local" checked>
+          <span class="radio-custom"></span>
+          <span class="radio-text">
+            <strong>Local Storage</strong>
+            <small>Data stored in your browser</small>
+          </span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="storage" value="remote">
+          <span class="radio-custom"></span>
+          <span class="radio-text">
+            <strong>Remote (JSONBin)</strong>
+            <small>Data stored in the cloud</small>
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <!-- CRUD Form -->
+    <section class="crud-section" aria-labelledby="crud-title">
+      <h2 id="crud-title">Project Form</h2>
+      
+      <form id="project-form" class="crud-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-id">Project ID</label>
+            <input type="number" id="project-id" name="id" placeholder="Auto-generated for new projects" min="1">
+            <small class="form-hint">Leave empty for new projects, or enter ID to update/delete</small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-title">Title <span class="required">*</span></label>
+            <input type="text" id="project-title" name="title" required placeholder="e.g., My Awesome Project">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-image">Image URL</label>
+            <input type="text" id="project-image" name="image" placeholder="e.g., images/project.png or https://...">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-image-alt">Image Alt Text</label>
+            <input type="text" id="project-image-alt" name="imageAlt" placeholder="Describe the image for accessibility">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-description">Description <span class="required">*</span></label>
+            <textarea id="project-description" name="description" rows="4" required placeholder="Describe your project..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label for="project-link">Link URL</label>
+            <input type="url" id="project-link" name="link" placeholder="https://example.com">
+          </div>
+          <div class="form-group">
+            <label for="project-date">Date</label>
+            <input type="text" id="project-date" name="date" placeholder="e.g., 2024 or Jan 2024">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-tags">Tags (comma-separated)</label>
+            <input type="text" id="project-tags" name="tags" placeholder="e.g., JavaScript, React, Web Dev">
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <button type="button" id="btn-create" class="btn btn--create">
+            <span class="btn__icon">➕</span> Create (POST)
+          </button>
+          <button type="button" id="btn-update" class="btn btn--update">
+            <span class="btn__icon">✏️</span> Update (PUT)
+          </button>
+          <button type="button" id="btn-delete" class="btn btn--delete">
+            <span class="btn__icon">🗑️</span> Delete (DELETE)
+          </button>
+          <button type="reset" class="btn btn--reset">
+            <span class="btn__icon">↺</span> Clear Form
+          </button>
+        </div>
+      </form>
+
+      <!-- Status Messages -->
+      <div id="crud-status" class="crud-status" aria-live="polite"></div>
+    </section>
+
+    <!-- Existing Projects List -->
+    <section class="existing-projects" aria-labelledby="existing-title">
+      <h2 id="existing-title">Existing Projects</h2>
+      <p class="section-description">Click on a project to load it into the form for editing or deletion.</p>
+      
+      <button type="button" id="btn-refresh" class="btn btn--secondary">
+        <span class="btn__icon">🔄</span> Refresh List
+      </button>
+      
+      <div class="projects-list" id="projects-list">
+        <!-- Projects will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Back Link -->
+    <section class="back-link-section">
+      <a href="project-cards.html" class="btn btn--primary">
+        <span class="btn__icon">←</span> Back to Project Cards
+      </a>
+    </section>
+
+    <footer class="page-footer">
+      <p>&copy; 2025 Nasser Al Nasser — <span><a href="contact.html">Get in touch</a></span></p>
+    </footer>
+  </main>
+
+  <!-- Right Rail -->
+  <nav class="rail rail--nav" aria-label="Primary">
+    <label class="theme-toggle" for="theme-toggle" title="Toggle light/dark">☀︎/☾</label>
+    <input hidden type="checkbox" id="theme-toggle" aria-label="Toggle light or dark theme">
+
+    <ul class="vnav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="project-cards.html">Cards</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
