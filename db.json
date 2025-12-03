@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Marketplace Web App",
+      "image": "images/marketplace.png",
+      "imageAlt": "Screenshot of the UCSD Student Marketplace application",
+      "description": "A campus-only marketplace for verified UCSD students to trade items and services.",
+      "link": "#p1",
+      "date": "2024",
+      "tags": ["Web Components", "JavaScript", "CSS"]
+    },
+    {
+      "id": 2,
+      "title": "Data-Leak Detection Algorithm",
+      "image": "images/data-leak.png",
+      "imageAlt": "Visualization of the data leak detection model",
+      "description": "ML model in Python that flags code patterns linked to potential data leaks.",
+      "link": "#p2",
+      "date": "2024",
+      "tags": ["Python", "Pandas", "ML"]
+    },
+    {
+      "id": 3,
+      "title": "Automated Trading Bot",
+      "image": "images/trading-bot.png",
+      "imageAlt": "Trading bot dashboard",
+      "description": "Feature-engineered pipeline with paper trades and risk limits.",
+      "link": "#p3",
+      "date": "2023",
+      "tags": ["Python", "REST API"]
+    },
+    {
+      "id": 4,
+      "title": "RunTracker CLI",
+      "image": "images/runtracker.png",
+      "imageAlt": "Terminal showing RunTracker output",
+      "description": "CLI tool to log runs and surface weekly trends.",
+      "link": "#",
+      "date": "2023",
+      "tags": ["Node.js", "CLI"]
+    }
+  ]
+}

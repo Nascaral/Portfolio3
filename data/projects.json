@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Marketplace Web App",
+    "image": "images/marketplace.png",
+    "imageAlt": "Screenshot of the UCSD Student Marketplace application showing listings",
+    "description": "A campus-only marketplace for verified UCSD students and staff to list, browse, and trade second-hand items and services. Built with focus on accessibility and performance.",
+    "link": "#p1",
+    "date": "2024",
+    "tags": ["Web Components", "JavaScript", "CSS", "A11y"]
+  },
+  {
+    "id": 2,
+    "title": "Data-Leak Detection Algorithm",
+    "description": "Supervised machine learning model in Python that flags code patterns linked to potential data leaks. Built dataset, feature pipeline, and evaluation workflow from scratch.",
+    "link": "#p2",
+    "date": "2024",
+    "tags": ["Python", "Pandas", "scikit-learn", "ML"]
+  },
+  {
+    "id": 3,
+    "title": "Automated Trading Bot",
+    "description": "Streaming market data into a feature-engineered pipeline with model-driven signals, paper trades, and basic risk limits. Safe defaults and circuit-breakers included.",
+    "link": "#p3",
+    "date": "2023",
+    "tags": ["Python", "REST API", "Automation"]
+  },
+  {
+    "id": 4,
+    "title": "RunTracker CLI",
+    "description": "Command-line tool to log running sessions and surface weekly trends. Helps track distance, pace, and consistency over time.",
+    "link": "#",
+    "date": "2023",
+    "tags": ["Node.js", "CLI", "Data Viz"]
+  },
+  {
+    "id": 5,
+    "title": "Tab Tidy Browser Extension",
+    "description": "Browser userscript that groups tabs by domain and saves memory. Helps manage tab overload with automatic organization.",
+    "link": "#",
+    "date": "2023",
+    "tags": ["JavaScript", "Browser API", "UX"]
+  },
+  {
+    "id": 6,
+    "title": "Boxer's Timer",
+    "description": "Training timer with customizable rounds, rest periods, and audio cues. Tuned specifically for boxing roadwork and interval training.",
+    "link": "#",
+    "date": "2022",
+    "tags": ["JavaScript", "Audio API", "PWA"]
+  }
+]
